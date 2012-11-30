@@ -1,0 +1,80 @@
+#!/bin/bash
+
+## ROOT configuration
+##Configure the chrome repo
+
+sudo cat << CHROME_REPO > /etc/yum.repos.d/chrome.repo
+[google-chrome]
+name=google-chrome - 64-bit
+baseurl=http://dl.google.com/linux/chrome/rpm/stable/x86_64
+enabled=1
+gpgcheck=1
+gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub
+
+CHROME_REPO
+
+sudo chown root:root /etc/yum.repos.d/chrome.repo
+
+
+
+sudo yum -y install google-chrome-stable
+
+
+sudo yum -y install wget vim-enhanced  gnome-shell-extension-theme-selector  gnome-shell-extension-alternative-status-menu gnome-shell-extension-places-menu gnome-tweak-tool 
+
+sudo yum -y install xguest
+
+### If particular gnome extension doesn't work, check if the right gnome shell version is captured in the extension's json file.
+#
+
+
+####Install the firmware necessary
+
+pushd /tmp
+
+export FIRMWARE_INSTALL_DIR="/lib/firmware"
+wget http://mirror2.openwrt.org/sources/broadcom-wl-4.150.10.5.tar.bz2
+tar xjf broadcom-wl-4.150.10.5.tar.bz2
+pushd broadcom-wl-4.150.10.5/driver
+
+sudo b43-fwcutter -w "$FIRMWARE_INSTALL_DIR" wl_apsta_mimo.o
+
+popd
+popd
+
+sudo rm -rf broadcom*
+
+
+#####Install the VLC Player
+rpm -Uvh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
+
+yum -y install vlc mozilla-vlc
+
+## VLC does it all
+yum -y erase totem rhythmbox
+
+
+yum -y erase evolution empathy 
+
+#################USER Configuration###############
+
+mkdir -p ~/.mozilla/plugins
+cp /usr/lib64/mozilla/plugins/libvlcplugin.so ~/.mozilla/plugins
+
+
+#Add VLC to favorites 
+value=$(dconf read /org/gnome/shell/favorite-apps | sed "s#\]#, \'vlc.desktop'\]#g")
+dconf write "/org/gnome/shell/favorite-apps" "$value"
+
+
+value=$(dconf read /org/gnome/shell/favorite-apps | sed "s#\]#, \'vlc.desktop'\]#g")
+dconf write "/org/gnome/shell/favorite-apps" "$value"
+
+## Add Chrome to Favorites
+mkdir -p "~/.local/share/applications"
+cp /opt/google/chrome/google-chrome.desktop "~/.local/share/applications"
+
+value=$(dconf read /org/gnome/shell/favorite-apps | sed "s#\]#, \'google-chrome.desktop'\]#g")
+dconf write "/org/gnome/shell/favorite-apps" "$value"
+
+unset value
