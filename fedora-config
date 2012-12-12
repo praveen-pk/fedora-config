@@ -20,7 +20,7 @@ sudo chown root:root /etc/yum.repos.d/chrome.repo
 sudo yum -y install google-chrome-stable
 
 
-sudo yum -y install wget vim-enhanced  gnome-shell-extension-theme-selector  gnome-shell-extension-alternative-status-menu gnome-shell-extension-places-menu gnome-tweak-tool 
+sudo yum -y install wget vim-enhanced  gnome-shell-extension-theme-selector  gnome-shell-extension-alternative-status-menu gnome-shell-extension-places-menu gnome-tweak-tool rdesktop
 
 sudo yum -y install xguest
 
@@ -55,6 +55,10 @@ yum -y erase totem rhythmbox
 
 
 yum -y erase evolution empathy 
+
+#### Other Applications
+yum -y install gnote cscope
+
 
 #################USER Configuration###############
 
