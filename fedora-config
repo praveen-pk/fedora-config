@@ -27,6 +27,8 @@ sudo yum -y install xguest
 ### If particular gnome extension doesn't work, check if the right gnome shell version is captured in the extension's json file.
 #
 
+####
+#Package foomatic-db-ppds from http://www.openprinting.org has many PPD files from various manufacturers.
 
 ####Install the firmware necessary
 
