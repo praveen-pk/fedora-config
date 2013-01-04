@@ -61,6 +61,12 @@ yum -y erase evolution empathy
 #### Other Applications
 yum -y install gnote cscope
 
+### USB Auto suspend
+#usb autosuspend it enabled to 2000 milli seconds by default. 
+#Increase the same with usbcore.autosuspend=1800000 option to the kernel command line. This will increase the delay to 30 mins
+# If not re-compile the kernel with CONFIG_USB_SUSPEND disabled.
+
+
 
 #################USER Configuration###############
 
