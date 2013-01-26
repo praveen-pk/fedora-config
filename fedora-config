@@ -22,7 +22,7 @@ sudo yum -y install google-chrome-stable
 
 sudo yum -y install wget vim-enhanced  gnome-shell-extension-theme-selector  gnome-shell-extension-alternative-status-menu gnome-shell-extension-places-menu gnome-tweak-tool rdesktop
 
-sudo yum -y install xguest
+sudo yum -y install xguest easytag
 
 ### If particular gnome extension doesn't work, check if the right gnome shell version is captured in the extension's json file.
 #
