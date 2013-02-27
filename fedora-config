@@ -52,12 +52,16 @@ sudo rm -rf broadcom*
 #####Install the VLC Player
 rpm -Uvh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
 
+#Enable Livna repo primarily for libdvdcss (encrypted DVDs)
+rpm -Uvh  http://rpm.livna.org/livna-release.rpm
+
 yum -y install vlc mozilla-vlc
 
 ## VLC does it all
 yum -y erase totem rhythmbox
 
-
+# some packages to play DVDs
+yum -y install libdvdread libdvdcss libdvdnav gstreamer-plugins-ugly gstreamer-plugins-bad
 yum -y erase evolution empathy 
 
 #### Other Applications
@@ -68,7 +72,8 @@ yum -y install gnote cscope
 #Increase the same with usbcore.autosuspend=1800000 option to the kernel command line. This will increase the delay to 30 mins
 # If not re-compile the kernel with CONFIG_USB_SUSPEND disabled.
 
-
+##Remove the extra repos
+yum erase livna-release rpmfusion-free-release 
 
 #################USER Configuration###############
 
